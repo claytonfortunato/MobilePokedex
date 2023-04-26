@@ -32,9 +32,11 @@ export const Header = () => {
 
 const styles = StyleSheet.create({
   container: {
+    height: 150,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    backgroundColor: "#ABF993",
   },
   header: {
     fontSize: 32,
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   input: {
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
