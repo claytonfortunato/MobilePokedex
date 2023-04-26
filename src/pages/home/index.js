@@ -12,23 +12,8 @@ export const Home = () => {
   useEffect(() => {
     const fetchApi = async () => {
       const response = await api.get("/pokemon");
-      const { results } = response.data;
 
-      const payloadPokemons = await Promise.all(
-        results.map(async (pokemon) => {
-          const { id, types } = await getMoreInfoAboutPokemonsByUrl(
-            pokemon.url
-          );
-
-          return {
-            name: pokemon.name,
-            id,
-            types,
-          };
-        })
-      );
-
-      setPokemons(payloadPokemons);
+      setPokemons(response.data);
     };
 
     fetchApi();
