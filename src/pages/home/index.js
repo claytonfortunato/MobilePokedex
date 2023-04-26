@@ -25,7 +25,7 @@ export const Home = () => {
       <FlatList
         data={pokemons}
         keyExtractor={(pokemon) => pokemon.id.toString()}
-        renderItem={({ item: pokemon }) => <Card data={pokemon} />}
+        renderItem={({ item }) => console.log(item)}
       />
     </View>
   );

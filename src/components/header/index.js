@@ -5,17 +5,28 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  Image,
+  ImageBackground,
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 
-export const Header = () => {
+import pokeball from "../../assets/img/pokeball.png";
+import filter from "../../assets/icon/filter.png";
+import sort from "../../assets/icon/sort.png";
+import generation from "../../assets/icon/generation.png";
+
+export function Header() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Pokédex</Text>
-      <Text style={styles.box}>
-        Pesquise o Pokémon pelo nome ou usando o número do Pokédex nacional.
-      </Text>
+      <ImageBackground source={pokeball} style={styles.cover}>
+        <Order />
+
+        <Text style={styles.header}>Pokédex</Text>
+        <Text style={styles.box}>
+          Pesquise o Pokémon pelo nome ou usando o número do Pokédex nacional.
+        </Text>
+      </ImageBackground>
 
       <View style={styles.form}>
         <TouchableOpacity>
@@ -28,7 +39,7 @@ export const Header = () => {
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +47,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#ABF993",
+    backgroundColor: "#ddd",
   },
   header: {
     fontSize: 32,
@@ -55,16 +66,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 2,
+    gap: 10,
     padding: 20,
-    marginTop: 22,
   },
   input: {
     width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
     gap: 10,
     fontSize: 16,
+    fontWeight: "400",
+  },
+  cover: {
+    height: "100%",
   },
 });
