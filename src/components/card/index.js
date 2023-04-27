@@ -6,6 +6,12 @@ export const Card = ({ data }) => {
       <View style={styles.wrapper}>
         <Text style={styles.number}>#{data.id}</Text>
         <Text style={styles.name}>{data.name}</Text>
+
+        <View style={styles.type}>
+          {data.types.map((pokemonType) => (
+            <Text>{pokemonType.type.name}</Text>
+          ))}
+        </View>
       </View>
 
       <View>
@@ -24,13 +30,13 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: 120,
-    backgroundColor: "#222",
     margin: 10,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     borderRadius: 10,
     marginTop: 80,
+    backgroundColor: "#ddd",
   },
   wrapper: {
     flexDirection: "column",
@@ -51,5 +57,10 @@ const styles = StyleSheet.create({
     marginTop: -40,
     width: 130,
     height: 130,
+  },
+  type: {
+    flexDirection: "row",
+    gap: 10,
+    textTransform: "capitalize",
   },
 });
