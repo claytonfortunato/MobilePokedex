@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import pokeball from "../../assets/img/pokeball.png";
-import filter from "../../assets/icon/filter.png";
+import filter from "../../assets/icon/filter.svg";
 import sort from "../../assets/icon/sort.png";
 import generation from "../../assets/icon/generation.png";
 
@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     height: 150,
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#62B957",
   },
   header: {
     fontSize: 32,

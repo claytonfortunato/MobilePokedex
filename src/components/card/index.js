@@ -1,6 +1,8 @@
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text, ImageBackground } from "react-native";
 
 import { backgroundColors } from "../../styles/colors";
+
+import cardPokeball from "../../assets/img/Pokeball_card.png";
 
 export const Card = ({ data }) => {
   let type = "grass";
@@ -9,7 +11,10 @@ export const Card = ({ data }) => {
   }
   return (
     <View
-      style={{ ...styles.container, backgroundColor: backgroundColors[type] }}
+      style={{
+        ...styles.container,
+        backgroundColor: backgroundColors[type],
+      }}
     >
       <View style={styles.wrapper}>
         <Text style={styles.number}>#{data.id}</Text>
@@ -24,14 +29,16 @@ export const Card = ({ data }) => {
         </View>
       </View>
 
-      <View>
-        <Image
-          style={styles.image}
-          source={{
-            uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`,
-          }}
-        />
-      </View>
+      <ImageBackground source={cardPokeball} style={styles.imageBackground}>
+        <View>
+          <Image
+            style={styles.image}
+            source={{
+              uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`,
+            }}
+          />
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -76,5 +83,10 @@ const styles = StyleSheet.create({
     padding: 6,
     color: "#fff",
     textTransform: "capitalize",
+  },
+  imageBackground: {
+    width: 100,
+    height: 100,
+    paddingRight: 10,
   },
 });
