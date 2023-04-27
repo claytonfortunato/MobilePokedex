@@ -1,15 +1,25 @@
 import { View, StyleSheet, Image, Text } from "react-native";
 
+import { backgroundColors } from "../../styles/colors";
+
 export const Card = ({ data }) => {
+  let type = "grass";
+  if (data > 3) {
+    type = "fire";
+  }
   return (
-    <View style={styles.container}>
+    <View
+      style={{ ...styles.container, backgroundColor: backgroundColors[type] }}
+    >
       <View style={styles.wrapper}>
         <Text style={styles.number}>#{data.id}</Text>
         <Text style={styles.name}>{data.name}</Text>
 
         <View style={styles.type}>
           {data.types.map((pokemonType) => (
-            <Text style={styles.bgcolor}>{pokemonType.type.name}</Text>
+            <Text style={styles.bgcolor} type={type}>
+              {pokemonType.type.name}
+            </Text>
           ))}
         </View>
       </View>
@@ -28,15 +38,14 @@ export const Card = ({ data }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    flex: 1,
+    width: "90%",
     height: 120,
     margin: 10,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     borderRadius: 10,
-    marginTop: 80,
-    backgroundColor: "#ddd",
   },
   wrapper: {
     flexDirection: "column",
