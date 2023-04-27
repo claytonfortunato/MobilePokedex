@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import pokeball from "../../assets/img/pokeball.png";
-import filter from "../../assets/icon/filter.svg";
+import filter from "../../assets/icon/filter.png";
 import sort from "../../assets/icon/sort.png";
 import generation from "../../assets/icon/generation.png";
 

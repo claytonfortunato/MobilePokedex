@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     borderRadius: 10,
+    marginTop: 30,
   },
   wrapper: {
     flexDirection: "column",
@@ -87,6 +88,6 @@ const styles = StyleSheet.create({
   imageBackground: {
     width: 100,
     height: 100,
-    paddingRight: 10,
+    paddingLeft: "4%",
   },
 });
