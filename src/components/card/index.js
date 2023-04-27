@@ -9,7 +9,7 @@ export const Card = ({ data }) => {
 
         <View style={styles.type}>
           {data.types.map((pokemonType) => (
-            <Text>{pokemonType.type.name}</Text>
+            <Text style={styles.bgcolor}>{pokemonType.type.name}</Text>
           ))}
         </View>
       </View>
@@ -61,6 +61,11 @@ const styles = StyleSheet.create({
   type: {
     flexDirection: "row",
     gap: 10,
+  },
+  bgcolor: {
+    backgroundColor: "#222",
+    padding: 6,
+    color: "#fff",
     textTransform: "capitalize",
   },
 });
