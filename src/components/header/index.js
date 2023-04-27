@@ -20,7 +20,11 @@ export function Header() {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={pokeball} style={styles.cover}>
-        <Order />
+        <View>
+          <Image source={filter} />
+          <Image source={sort} />
+          <Image source={generation} />
+        </View>
 
         <Text style={styles.header}>Pokédex</Text>
         <Text style={styles.box}>
