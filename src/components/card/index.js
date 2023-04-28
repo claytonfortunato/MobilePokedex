@@ -36,13 +36,13 @@ export const Card = ({ data }) => {
         <Text style={styles.number}>#{data.id}</Text>
         <Text style={styles.name}>{data.name}</Text>
 
-        <View style={styles.type}>
+        {/* <View style={styles.type}>
           {data.types.map((pokemonType) => (
             <Text style={styles.bgcolor} type={type}>
               {pokemonType.type.name}
             </Text>
           ))}
-        </View>
+        </View> */}
       </View>
 
       <ImageBackground source={cardPokeball} style={styles.imageBackground}>
