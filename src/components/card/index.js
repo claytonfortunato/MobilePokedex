@@ -1,20 +1,36 @@
-import { View, StyleSheet, Image, Text, ImageBackground } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
+
+import { useNavigation } from "@react-navigation/native";
 
 import { backgroundColors } from "../../styles/colors";
 
 import cardPokeball from "../../assets/img/Pokeball_card.png";
 
 export const Card = ({ data }) => {
+  const navigation = useNavigation();
+
+  const handleNavigate = () => {
+    navigation.navigate("Detail");
+  };
+
   let type = "grass";
   if (data > 3) {
     type = "fire";
   }
   return (
-    <View
+    <TouchableOpacity
       style={{
         ...styles.container,
         backgroundColor: backgroundColors[type],
       }}
+      onPress={handleNavigate}
     >
       <View style={styles.wrapper}>
         <Text style={styles.number}>#{data.id}</Text>
@@ -39,7 +55,7 @@ export const Card = ({ data }) => {
           />
         </View>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   );
 };
 
