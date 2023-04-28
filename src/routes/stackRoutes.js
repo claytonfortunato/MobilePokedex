@@ -16,7 +16,7 @@ export function StackRoutes() {
       <Stack.Screen
         name="Detail"
         component={Detail}
-        options={{ title: "Detalhes do Pokémon" }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

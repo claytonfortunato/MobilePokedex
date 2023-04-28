@@ -6,8 +6,11 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
+
+import { AntDesign } from "@expo/vector-icons";
 
 import Circle from "../../assets/img/Circle.png";
 
@@ -45,37 +48,41 @@ export const Detail = () => {
   }, [pokemonId]);
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={Circle} style={styles.ImgBackground}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${route.params?.data.id}.png`,
-          }}
-        />
-      </ImageBackground>
-
+    <ScrollView style={{ flex: 1, backgroundColor: "#8BBE8A" }}>
       <View style={styles.header}>
-        <Text style={styles.id}>#{route.params?.data.id}</Text>
-        <Text style={styles.name}>{route.params?.data.name}</Text>
+        <TouchableOpacity>
+          <AntDesign name="arrowleft" size={30} color="#fff" />
+        </TouchableOpacity>
+
+        <ImageBackground source={Circle} style={styles.ImgBackground}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${route.params?.data.id}.png`,
+            }}
+          />
+        </ImageBackground>
+
+        <View style={styles.wrapper}>
+          <Text style={styles.id}>#{route.params?.data.id}</Text>
+          <Text style={styles.name}>{route.params?.data.name}</Text>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#ddd",
   },
   image: {
     height: 130,
     width: 130,
     marginTop: -10,
   },
-  header: {
+  wrapper: {
     flexDirection: "column",
     marginLeft: 32,
   },
