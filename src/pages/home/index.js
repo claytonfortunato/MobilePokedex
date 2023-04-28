@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
+  SafeAreaView,
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -53,7 +54,7 @@ export const Home = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header />
 
       <View style={styles.form}>
@@ -68,11 +69,11 @@ export const Home = () => {
 
       <FlatList
         data={pokemons}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(pokemon) => pokemon.id.toString()}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => <Card data={item} />}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     backgroundColor: "#fff",
+    height: "100%",
   },
   form: {
     backgroundColor: "#f2f2f2",

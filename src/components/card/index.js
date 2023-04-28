@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { backgroundColors } from "../../styles/colors";
 
 import cardPokeball from "../../assets/img/Pokeball_card.png";
+import dots from "../../assets/img/dots.png";
 
 export const Card = ({ data }) => {
   const navigation = useNavigation();
@@ -33,16 +34,17 @@ export const Card = ({ data }) => {
       onPress={handleNavigate}
     >
       <View style={styles.wrapper}>
+        <Image source={dots} style={styles.imageCard} />
         <Text style={styles.number}>#{data.id}</Text>
         <Text style={styles.name}>{data.name}</Text>
 
-        {/* <View style={styles.type}>
+        <View style={styles.boxType}>
           {data.types.map((pokemonType) => (
-            <Text style={styles.bgcolor} type={type}>
-              {pokemonType.type.name}
-            </Text>
+            <View style={styles.bgcolor} type={type.name} key={type.name}>
+              <Text style={styles.typeText}>{pokemonType.type.name}</Text>
+            </View>
           ))}
-        </View> */}
+        </View>
       </View>
 
       <ImageBackground source={cardPokeball} style={styles.imageBackground}>
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "90%",
-    height: 120,
+    height: 140,
     margin: 10,
     flexDirection: "row",
     justifyContent: "space-around",
@@ -80,8 +82,8 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   name: {
-    fontSize: 25,
-    fontWeight: "bold",
+    fontSize: 26,
+    fontWeight: 700,
     lineHeight: 31,
     textTransform: "capitalize",
     color: "#fff",
@@ -91,19 +93,32 @@ const styles = StyleSheet.create({
     width: 130,
     height: 130,
   },
-  type: {
+  boxType: {
     flexDirection: "row",
     gap: 10,
+    marginTop: 6,
   },
   bgcolor: {
     backgroundColor: "#222",
-    padding: 6,
-    color: "#fff",
-    textTransform: "capitalize",
+    padding: 5,
+    borderRadius: 4,
   },
   imageBackground: {
     width: 100,
     height: 100,
     paddingLeft: "4%",
+  },
+  imageCard: {
+    position: "absolute",
+    width: 74,
+    height: 32,
+    left: 70,
+    top: -12,
+  },
+  typeText: {
+    color: "#fff",
+    textTransform: "capitalize",
+    fontSize: 12,
+    lineHeight: 14.32,
   },
 });
