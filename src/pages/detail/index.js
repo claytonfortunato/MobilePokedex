@@ -36,9 +36,8 @@ export const Detail = () => {
   }, [pokemonId]);
 
   return (
-    <ScrollView>
-      <View>
-        <Text>{route.params?.data.name}</Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.wrapperImage}>
         <Image
           style={styles.image}
           source={{
@@ -46,11 +45,19 @@ export const Detail = () => {
           }}
         />
       </View>
+
+      <View style={styles.header}>
+        <Text>#{route.params?.data.id}</Text>
+        <Text>{route.params?.data.name}</Text>
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   image: {
     height: 130,
     width: 130,

@@ -79,6 +79,7 @@ export const Home = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+    backgroundColor: "#fff",
   },
   form: {
     backgroundColor: "#f2f2f2",
@@ -89,7 +90,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     padding: 20,
-    marginBottom: 24,
   },
   input: {
     width: "90%",
