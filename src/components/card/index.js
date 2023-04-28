@@ -39,9 +39,9 @@ export const Card = ({ data }) => {
         <Text style={styles.name}>{data.name}</Text>
 
         <View style={styles.boxType}>
-          {data.types.map((pokemonType) => (
-            <View style={styles.bgcolor} type={type.name} key={type.name}>
-              <Text style={styles.typeText}>{pokemonType.type.name}</Text>
+          {data.types.map((type) => (
+            <View style={styles.bgcolor} key={type.id} type={type.name}>
+              <Text style={styles.typeText}>{type.type.name}</Text>
             </View>
           ))}
         </View>

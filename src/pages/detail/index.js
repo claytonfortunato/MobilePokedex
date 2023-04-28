@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 
@@ -16,33 +17,27 @@ import Circle from "../../assets/img/Circle.png";
 
 import api from "../../services/api";
 
-export const Detail = () => {
+export function Detail() {
   const route = useRoute();
   const navigation = useNavigation();
 
   const { pokemonId } = route.params;
 
-  const [pokemon, setPokemon] = useState({});
+  const [pokemon, setPokemon] = useState();
+  const [load, setLoad] = useState(true);
 
   useEffect(() => {
     async function getPokemonDetail() {
       try {
-        const response = await api.get(
-          `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`
-        );
+        const response = await api.get(`/pokemon/${pokemonId}/`);
 
         const { stats, abilities, id, name, types } = response.data;
 
-        setPokemon({
-          stats,
-          abilities,
-          id,
-          name,
-          types,
-          color,
-        });
+        setPokemon(types, stats);
       } catch (err) {
-        console.log(err);
+        Alert.alert("Ops,ocorreu um erro, tent mais tarde!");
+      } finally {
+        setLoad(false);
       }
     }
     getPokemonDetail();
@@ -71,12 +66,11 @@ export const Detail = () => {
         <View style={styles.wrapper}>
           <Text style={styles.id}>#{route.params?.data.id}</Text>
           <Text style={styles.name}>{route.params?.data.name}</Text>
-          <Text>{route.params?.type}</Text>
         </View>
       </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   header: {
