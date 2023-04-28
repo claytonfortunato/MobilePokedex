@@ -1,5 +1,9 @@
-import React from "react";
+import { View, Text } from "react-native";
 
 export const Detail = () => {
-  return <div>Detalhes do pokemon</div>;
+  return (
+    <View>
+      <Text>Detalhes do Pokémon</Text>
+    </View>
+  );
 };
