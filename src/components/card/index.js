@@ -17,7 +17,7 @@ export const Card = ({ data }) => {
   const navigation = useNavigation();
 
   const handleNavigate = () => {
-    navigation.navigate("Detail");
+    navigation.navigate("Detail", { data: data });
   };
 
   let type = "grass";
