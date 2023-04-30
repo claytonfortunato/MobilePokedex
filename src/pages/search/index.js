@@ -9,11 +9,28 @@ export const Search = () => {
   const route = useRoute();
   const [pokemons, setPokemons] = useState([]);
 
+  useEffect(() => {
+    async function fetchPokemons() {
+      const response = await api.get(`/pokemon?${route.params?.name}`);
+      setPokemons(response.data);
+    }
+    fetchPokemons();
+  }, [route.params?.name]);
+
   <View style={styles.container}>
-    <FlatList />
+    <FlatList
+      data={pokemons}
+      keyExtractor={(item) => String(item.id)}
+      renderItem={({ item }) => <Card data={item} />}
+      ListEmptyComponent={() => (
+        <Text>Não encontramos o que está buscando...</Text>
+      )}
+    />
   </View>;
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
 });
