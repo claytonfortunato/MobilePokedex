@@ -48,7 +48,7 @@ export function Detail() {
   };
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#8BBE8A" }}>
+    <ScrollView style={{ flex: 1, backgroundColor: backgroundColors[type] }}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
           <AntDesign name="arrowleft" size={30} color="#fff" />
