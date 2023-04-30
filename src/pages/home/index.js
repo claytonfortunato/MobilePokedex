@@ -13,12 +13,17 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 import { Header } from "../../components/header";
+import { Card } from "../../components/card";
 
 import api from "../../services/api";
-import { Card } from "../../components/card";
+
+import { useNavigation } from "@react-navigation/native";
 
 export const Home = () => {
   const [pokemons, setPokemons] = useState();
+  const [inputValue, setInputValue] = useState();
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function getPokemons() {
@@ -53,17 +58,27 @@ export const Home = () => {
     return { id, types };
   }
 
+  const handleSearch = () => {
+    if (!inputValue) return;
+
+    let input = inputValue;
+    setInputValue("");
+    navigation.navigate("Search", { name: input });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header />
 
       <View style={styles.form}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleSearch}>
           <Ionicons name="search" size={28} color="#747476" />
         </TouchableOpacity>
         <TextInput
           placeholder="Qual pokémon você está procurando?"
           style={styles.input}
+          value={inputValue}
+          onChangeText={(text) => setInputValue(text)}
         />
       </View>
 
