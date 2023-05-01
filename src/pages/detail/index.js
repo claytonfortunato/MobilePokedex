@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 
+import { backgroundColors } from "../../styles/colors";
+
 import { AntDesign } from "@expo/vector-icons";
 
 import Circle from "../../assets/img/Circle.png";
@@ -48,7 +50,14 @@ export function Detail() {
   };
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: backgroundColors[type] }}>
+    <ScrollView
+      style={{
+        ...styles.card,
+        flex: 1,
+        backgroundColor:
+          backgroundColors[route.params?.data.types[0].type.name],
+      }}
+    >
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
           <AntDesign name="arrowleft" size={30} color="#fff" />

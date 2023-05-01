@@ -21,15 +21,11 @@ export const Card = ({ data }) => {
     navigation.navigate("Detail", { data: data });
   };
 
-  let type = "grass";
-  if (data > 3) {
-    type = "fire";
-  }
   return (
     <TouchableOpacity
       style={{
         ...styles.container,
-        backgroundColor: backgroundColors[type],
+        backgroundColor: backgroundColors[data.types[0].type.name],
       }}
       onPress={handleNavigate}
     >
@@ -40,7 +36,7 @@ export const Card = ({ data }) => {
 
         <View style={styles.boxType}>
           {data.types.map((type) => (
-            <View style={styles.bgcolor} key={type.id} type={type.name}>
+            <View style={styles.bgcolor} key={type.name} type={type.name}>
               <Text style={styles.typeText}>{type.type.name}</Text>
             </View>
           ))}

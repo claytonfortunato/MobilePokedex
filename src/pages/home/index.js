@@ -85,7 +85,7 @@ export const Home = () => {
       <FlatList
         data={pokemons}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => String(item.id)}
+        keyExtractor={(data) => String(data.id)}
         renderItem={({ item }) => <Card data={item} />}
       />
     </SafeAreaView>
