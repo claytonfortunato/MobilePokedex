@@ -10,6 +10,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 import { backgroundColors } from "../../styles/colors";
+import { boxType } from "../../styles/colors";
 
 import cardPokeball from "../../assets/img/Pokeball_card.png";
 import dots from "../../assets/img/dots.png";
@@ -34,9 +35,20 @@ export const Card = ({ data }) => {
         <Text style={styles.number}>#{data.id}</Text>
         <Text style={styles.name}>{data.name}</Text>
 
-        <View style={styles.boxType}>
+        <View
+          style={{
+            ...styles.boxType,
+          }}
+        >
           {data.types.map((type) => (
-            <View style={styles.bgcolor} key={type.name} type={type.name}>
+            <View
+              style={{
+                ...styles.bgcolor,
+                backgroundColor: boxType[type.type.name],
+              }}
+              key={type.name}
+              type={type.name}
+            >
               <Text style={styles.typeText}>{type.type.name}</Text>
             </View>
           ))}
