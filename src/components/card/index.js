@@ -46,7 +46,7 @@ export const Card = ({ data }) => {
                 ...styles.bgcolor,
                 backgroundColor: boxType[type.type.name],
               }}
-              key={type.name}
+              key={type.id}
               type={type.name}
             >
               <Text style={styles.typeText}>{type.type.name}</Text>
@@ -128,5 +128,6 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     fontSize: 12,
     lineHeight: 14.32,
+    margin: 4,
   },
 });

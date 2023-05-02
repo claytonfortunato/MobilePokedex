@@ -31,15 +31,15 @@ export function Detail() {
   useEffect(() => {
     async function getPokemonDetail() {
       try {
-        const response = await api.get(`/pokemon/${pokemonId}/`);
+        const response = await api.get(
+          `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`
+        );
 
         const { stats, abilities, id, name, types } = response.data;
 
-        setPokemon(types, stats);
+        setPokemon({ types, stats });
       } catch (err) {
         Alert.alert("Ops,ocorreu um erro, tent mais tarde!");
-      } finally {
-        setLoad(false);
       }
     }
     getPokemonDetail();
@@ -52,7 +52,6 @@ export function Detail() {
   return (
     <ScrollView
       style={{
-        ...styles.card,
         flex: 1,
         backgroundColor:
           backgroundColors[route.params?.data.types[0].type.name],
@@ -75,6 +74,9 @@ export function Detail() {
         <View style={styles.wrapper}>
           <Text style={styles.id}>#{route.params?.data.id}</Text>
           <Text style={styles.name}>{route.params?.data.name}</Text>
+          {pokemon.types.map(({ type }) => (
+            <Text>{type.type.name}</Text>
+          ))}
         </View>
       </View>
     </ScrollView>
@@ -118,4 +120,5 @@ const styles = StyleSheet.create({
     top: 70,
     left: 40,
   },
+  container: {},
 });
