@@ -20,7 +20,7 @@ import api from "../../services/api";
 import { useNavigation } from "@react-navigation/native";
 
 export const Home = () => {
-  const [pokemons, setPokemons] = useState();
+  const [pokemons, setPokemons] = useState([]);
   const [inputValue, setInputValue] = useState();
 
   const navigation = useNavigation();
@@ -85,7 +85,7 @@ export const Home = () => {
       <FlatList
         data={pokemons}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(data) => String(data.id)}
+        keyExtractor={(pokemons) => pokemons.id.toString()}
         renderItem={({ item }) => <Card data={item} />}
       />
     </SafeAreaView>

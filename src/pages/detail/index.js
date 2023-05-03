@@ -74,10 +74,13 @@ export function Detail() {
         <View style={styles.wrapper}>
           <Text style={styles.id}>#{route.params?.data.id}</Text>
           <Text style={styles.name}>{route.params?.data.name}</Text>
-          {pokemon.types.map(({ type }) => (
-            <Text>{type.type.name}</Text>
-          ))}
         </View>
+      </View>
+
+      <View>
+        {pokemon.stats.map((attribute) => (
+          <Text>{attribute.base_stat}</Text>
+        ))}
       </View>
     </ScrollView>
   );
