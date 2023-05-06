@@ -25,7 +25,7 @@ export function Detail() {
 
   const { pokemonId } = route.params;
 
-  const [pokemon, setPokemon] = useState();
+  const [pokemon, setPokemon] = useState({});
   const [load, setLoad] = useState(true);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function Detail() {
 
         const { stats, abilities, id, name, types } = response.data;
 
-        setPokemon({ types, stats });
+        setPokemon(types);
       } catch (err) {
         Alert.alert("Ops,ocorreu um erro, tent mais tarde!");
       }
@@ -74,13 +74,16 @@ export function Detail() {
         <View style={styles.wrapper}>
           <Text style={styles.id}>#{route.params?.data.id}</Text>
           <Text style={styles.name}>{route.params?.data.name}</Text>
-        </View>
-      </View>
 
-      <View>
-        {pokemon.stats.map((attribute) => (
-          <Text>{attribute.base_stat}</Text>
-        ))}
+          <View style={styles.elementType}>
+            <Text style={styles.typesStyle}>
+              {route.params?.data.types[0].type.name}
+            </Text>
+            <Text style={styles.typesStyle}>
+              {route.params?.data.types[1].type.name}
+            </Text>
+          </View>
+        </View>
       </View>
     </ScrollView>
   );
@@ -124,4 +127,17 @@ const styles = StyleSheet.create({
     left: 40,
   },
   container: {},
+  elementType: {
+    flexDirection: "row",
+  },
+
+  typesStyle: {
+    backgroundColor: "#ddd",
+    margin: 2,
+    padding: 6,
+    width: "30%",
+    fontSize: 14,
+    textTransform: "capitalize",
+    fontWeight: "500",
+  },
 });
