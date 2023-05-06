@@ -37,7 +37,7 @@ export function Detail() {
 
         const { stats, abilities, id, name, types } = response.data;
 
-        setPokemon(types);
+        setPokemon(types, stats);
       } catch (err) {
         Alert.alert("Ops,ocorreu um erro, tent mais tarde!");
       }
@@ -85,6 +85,10 @@ export function Detail() {
           </View>
         </View>
       </View>
+
+      <View style={styles.container}>
+        <Text style={styles.headerStats}>Base Stats</Text>
+      </View>
     </ScrollView>
   );
 }
@@ -126,11 +130,14 @@ const styles = StyleSheet.create({
     top: 70,
     left: 40,
   },
-  container: {},
+  container: {
+    backgroundColor: "#fff",
+    height: 2100,
+    borderRadius: 20,
+  },
   elementType: {
     flexDirection: "row",
   },
-
   typesStyle: {
     backgroundColor: "#ddd",
     margin: 2,
@@ -139,5 +146,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textTransform: "capitalize",
     fontWeight: "500",
+  },
+  headerStats: {
+    fontSize: 22,
+    fontWeight: "500",
+    marginLeft: 20,
+    marginTop: 20,
   },
 });
