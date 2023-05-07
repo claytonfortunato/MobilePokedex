@@ -7,15 +7,15 @@ import api from "../../services/api";
 
 export const Search = () => {
   const route = useRoute();
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState({});
 
   useEffect(() => {
-    async function fetchPokemons() {
-      const response = await api.get(`/pokemon?${route.params?.name}`);
+    async function fetchPokemons(pokemon) {
+      const response = await api.get(`/pokemon?${pokemon}`);
       setPokemons(response.data);
     }
     fetchPokemons();
-  }, [route.params?.name]);
+  }, []);
 
   <View style={styles.container}>
     <FlatList

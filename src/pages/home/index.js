@@ -26,9 +26,11 @@ export const Home = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    async function getPokemons() {
+    async function getPokemons(limit = 25, offset = 0) {
       try {
-        const response = await api.get("/pokemon");
+        const response = await api.get(
+          `/pokemon?limit=${limit}&offset=${offset}`
+        );
         const { results } = response.data;
         const payloadPokemons = await Promise.all(
           results.map(async (pokemon) => {

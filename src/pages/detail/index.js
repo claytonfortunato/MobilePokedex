@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   View,
@@ -26,23 +26,34 @@ export function Detail() {
   const { pokemonId } = route.params;
 
   const [pokemon, setPokemon] = useState({});
-  const [load, setLoad] = useState(true);
 
   useEffect(() => {
-    async function getPokemonDetail() {
+    async function getPokemons() {
       try {
         const response = await api.get(
           `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`
         );
+        const { results } = response.data;
+        const payloadPokemons = await Promise.all(
+          results.map(async (pokemon) => {
+            const { stats, abitities, id, name, types } =
+              await getMoreInfoAboutPokemonsByUrl(pokemon.url);
+            return {
+              name: pokemon.name,
+              id,
+              types,
+              stats,
+              abitities,
+            };
+          })
+        );
 
-        const { stats, abilities, id, name, types } = response.data;
-
-        setPokemon(types, stats);
+        setPokemon(payloadPokemons);
       } catch (err) {
-        Alert.alert("Ops,ocorreu um erro, tent mais tarde!");
+        console.log(err);
       }
     }
-    getPokemonDetail();
+    getPokemons();
   }, [pokemonId]);
 
   const handleBack = () => {
@@ -88,6 +99,12 @@ export function Detail() {
 
       <View style={styles.container}>
         <Text style={styles.headerStats}>Base Stats</Text>
+
+        {/* {pokemon.stats.map((attribute) => (
+          <View>
+            <Text>{attribute.pokemon.stat.name}</Text>
+          </View>
+        ))} */}
       </View>
     </ScrollView>
   );
