@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import {
-  Text,
   View,
   StyleSheet,
   FlatList,
@@ -26,7 +25,7 @@ export const Home = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    async function getPokemons(limit = 25, offset = 0) {
+    async function getPokemons(limit = 50, offset = 0) {
       try {
         const response = await api.get(
           `/pokemon?limit=${limit}&offset=${offset}`

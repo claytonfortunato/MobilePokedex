@@ -12,12 +12,14 @@ import {
 import { useRoute, useNavigation } from "@react-navigation/native";
 
 import { backgroundColors } from "../../styles/colors";
+import { boxType } from "../../styles/colors";
 
 import { AntDesign } from "@expo/vector-icons";
 
 import Circle from "../../assets/img/Circle.png";
 
 import api from "../../services/api";
+import { TypeElement } from "../../components/typeElement";
 
 export function Detail() {
   const route = useRoute();
@@ -26,35 +28,23 @@ export function Detail() {
   const { pokemonId } = route.params;
 
   const [pokemon, setPokemon] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function getPokemons() {
+    async function getPokemonsDetail() {
       try {
-        const response = await api.get(
-          `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`
-        );
-        const { results } = response.data;
-        const payloadPokemons = await Promise.all(
-          results.map(async (pokemon) => {
-            const { stats, abitities, id, name, types } =
-              await getMoreInfoAboutPokemonsByUrl(pokemon.url);
-            return {
-              name: pokemon.name,
-              id,
-              types,
-              stats,
-              abitities,
-            };
-          })
-        );
+        const response = await api.get(`/pokemon/${route.params?.data}/`);
+        const { stats, abilities, id, name, types } = response.data;
 
-        setPokemon(payloadPokemons);
-      } catch (err) {
-        console.log(err);
+        setPokemon({ stats, abilities, id, name, types });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(true);
       }
     }
-    getPokemons();
-  }, [pokemonId]);
+    getPokemonsDetail();
+  }, [route.params?.data]);
 
   const handleBack = () => {
     navigation.navigate("Home");
@@ -86,25 +76,27 @@ export function Detail() {
           <Text style={styles.id}>#{route.params?.data.id}</Text>
           <Text style={styles.name}>{route.params?.data.name}</Text>
 
-          <View style={styles.elementType}>
-            <Text style={styles.typesStyle}>
+          <View
+            style={{
+              ...styles.elementType,
+            }}
+          >
+            {/* <Text style={styles.typesStyle}>
               {route.params?.data.types[0].type.name}
             </Text>
             <Text style={styles.typesStyle}>
               {route.params?.data.types[1].type.name}
-            </Text>
+            </Text> */}
+
+            {route.params?.data.types.map((type) => (
+              <TypeElement key={type.name} data={type} />
+            ))}
           </View>
         </View>
       </View>
 
       <View style={styles.container}>
         <Text style={styles.headerStats}>Base Stats</Text>
-
-        {/* {pokemon.stats.map((attribute) => (
-          <View>
-            <Text>{attribute.pokemon.stat.name}</Text>
-          </View>
-        ))} */}
       </View>
     </ScrollView>
   );
@@ -148,9 +140,9 @@ const styles = StyleSheet.create({
     left: 40,
   },
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     height: 2100,
-    borderRadius: 20,
+    borderRadius: 30,
   },
   elementType: {
     flexDirection: "row",
