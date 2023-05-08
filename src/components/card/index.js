@@ -14,6 +14,7 @@ import { boxType } from "../../styles/colors";
 
 import cardPokeball from "../../assets/img/Pokeball_card.png";
 import dots from "../../assets/img/dots.png";
+import { TypeElement } from "../typeElement";
 
 export const Card = ({ data }) => {
   const navigation = useNavigation();
@@ -41,16 +42,17 @@ export const Card = ({ data }) => {
           }}
         >
           {data.types.map((type) => (
-            <View
-              style={{
-                ...styles.bgcolor,
-                backgroundColor: boxType[type.type.name],
-              }}
-              key={type.id}
-              type={type.name}
-            >
-              <Text style={styles.typeText}>{type.type.name}</Text>
-            </View>
+            // <View
+            //   style={{
+            //     ...styles.bgcolor,
+            //     backgroundColor: boxType[type.type.name],
+            //   }}
+            //   key={type.id}
+            //   type={type.name}
+            // >
+            //   <Text style={styles.typeText}>{type.type.name}</Text>
+            // </View>
+            <TypeElement key={type.id} data={type} />
           ))}
         </View>
       </View>
@@ -106,11 +108,6 @@ const styles = StyleSheet.create({
     gap: 10,
     marginTop: 6,
   },
-  bgcolor: {
-    backgroundColor: "#222",
-    padding: 5,
-    borderRadius: 4,
-  },
   imageBackground: {
     width: 100,
     height: 100,
@@ -122,12 +119,5 @@ const styles = StyleSheet.create({
     height: 32,
     left: 70,
     top: -12,
-  },
-  typeText: {
-    color: "#fff",
-    textTransform: "capitalize",
-    fontSize: 12,
-    lineHeight: 14.32,
-    margin: 4,
   },
 });

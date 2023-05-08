@@ -81,13 +81,6 @@ export function Detail() {
               ...styles.elementType,
             }}
           >
-            {/* <Text style={styles.typesStyle}>
-              {route.params?.data.types[0].type.name}
-            </Text>
-            <Text style={styles.typesStyle}>
-              {route.params?.data.types[1].type.name}
-            </Text> */}
-
             {route.params?.data.types.map((type) => (
               <TypeElement key={type.name} data={type} />
             ))}
@@ -146,15 +139,7 @@ const styles = StyleSheet.create({
   },
   elementType: {
     flexDirection: "row",
-  },
-  typesStyle: {
-    backgroundColor: "#ddd",
-    margin: 2,
-    padding: 6,
-    width: "30%",
-    fontSize: 14,
-    textTransform: "capitalize",
-    fontWeight: "500",
+    marginTop: 8,
   },
   headerStats: {
     fontSize: 22,

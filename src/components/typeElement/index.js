@@ -15,7 +15,7 @@ export function TypeElement({ data }) {
 const styles = StyleSheet.create({
   container: {
     padding: 5,
-    borderRadius: 4,
+    borderRadius: 6,
     marginRight: 4,
   },
   typeColor: {
