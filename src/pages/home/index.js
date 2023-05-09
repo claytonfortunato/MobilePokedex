@@ -19,8 +19,8 @@ import api from "../../services/api";
 import { useNavigation } from "@react-navigation/native";
 
 export const Home = () => {
+  const [inputValue, setInputValue] = useState("");
   const [pokemons, setPokemons] = useState([]);
-  const [inputValue, setInputValue] = useState();
 
   const navigation = useNavigation();
 
@@ -33,13 +33,14 @@ export const Home = () => {
         const { results } = response.data;
         const payloadPokemons = await Promise.all(
           results.map(async (pokemon) => {
-            const { id, types } = await getMoreInfoAboutPokemonsByUrl(
+            const { id, types, stats } = await getMoreInfoAboutPokemonsByUrl(
               pokemon.url
             );
             return {
               name: pokemon.name,
               id,
               types,
+              stats,
             };
           })
         );
@@ -54,9 +55,9 @@ export const Home = () => {
   async function getMoreInfoAboutPokemonsByUrl(url) {
     const response = await api.get(url);
 
-    const { id, types } = response.data;
+    const { id, types, stats, abilities } = response.data;
 
-    return { id, types };
+    return { id, types, stats, abilities };
   }
 
   const handleSearch = () => {

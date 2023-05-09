@@ -7,30 +7,28 @@ import api from "../../services/api";
 
 export const Search = () => {
   const route = useRoute();
+
+  const pokemonId = route.params;
   const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
     async function fetchPokemons() {
-      const response = await api.get(
-        `/pokemon?name_like=${route.params?.name}`
-      );
+      const response = await api.get(`/pokemon?name_like=${pokemonId}`);
 
-      setPokemons(response.data);
+      setPokemons(response);
     }
     fetchPokemons();
-  }, [route.params?.name]);
+  }, [pokemonId]);
 
   return (
     <View style={styles.container}>
       <FlatList
         showsHorizontalScrollIndicator={false}
         data={pokemons}
-        keyExtractor={(item) => String(item.id)}
+        keyExtractor={(pokemon) => pokemon.id.toString()}
         renderItem={({ item }) => <Card data={item} />}
         ListEmptyComponent={() => (
-          <Text style={styles.text}>
-            Não encontramos o que está buscando...
-          </Text>
+          <Text style={styles.text}>Não encontramos o pokémon desejado..</Text>
         )}
       />
     </View>
