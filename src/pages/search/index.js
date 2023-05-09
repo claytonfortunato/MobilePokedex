@@ -7,30 +7,43 @@ import api from "../../services/api";
 
 export const Search = () => {
   const route = useRoute();
-  const [pokemons, setPokemons] = useState({});
+  const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
-    async function fetchPokemons(pokemon) {
-      const response = await api.get(`/pokemon?${pokemon}`);
+    async function fetchPokemons() {
+      const response = await api.get(
+        `/pokemon?name_like=${route.params?.name}`
+      );
+
       setPokemons(response.data);
     }
     fetchPokemons();
-  }, []);
+  }, [route.params?.name]);
 
-  <View style={styles.container}>
-    <FlatList
-      data={pokemons}
-      keyExtractor={(item) => String(item.id)}
-      renderItem={({ item }) => <Card data={item} />}
-      ListEmptyComponent={() => (
-        <Text>Não encontramos o que está buscando...</Text>
-      )}
-    />
-  </View>;
+  return (
+    <View style={styles.container}>
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+        data={pokemons}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item }) => <Card data={item} />}
+        ListEmptyComponent={() => (
+          <Text style={styles.text}>
+            Não encontramos o que está buscando...
+          </Text>
+        )}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingStart: 14,
+    paddingTop: 20,
+  },
+  text: {
+    fontSize: 18,
   },
 });

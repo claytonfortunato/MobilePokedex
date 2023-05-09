@@ -33,7 +33,7 @@ export function Detail() {
   useEffect(() => {
     async function getPokemonsDetail() {
       try {
-        const response = await api.get(`/pokemon/${route.params?.data}/`);
+        const response = await api.get(`/pokemon/${pokemonId}/`);
         const { stats, abilities, id, name, types } = response.data;
 
         setPokemon({ stats, abilities, id, name, types });
@@ -44,7 +44,7 @@ export function Detail() {
       }
     }
     getPokemonsDetail();
-  }, [route.params?.data]);
+  }, [pokemonId]);
 
   const handleBack = () => {
     navigation.navigate("Home");
@@ -90,6 +90,10 @@ export function Detail() {
 
       <View style={styles.container}>
         <Text style={styles.headerStats}>Base Stats</Text>
+
+        {pokemon.stats.map((attribute) => (
+          <Text>{attribute.stats.name}</Text>
+        ))}
       </View>
     </ScrollView>
   );
