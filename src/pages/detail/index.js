@@ -41,8 +41,7 @@ export function Detail() {
     <ScrollView
       style={{
         flex: 1,
-        backgroundColor:
-          backgroundColors[route.params?.data.types[0].type.name],
+        backgroundColor: backgroundColors[currentType],
       }}
     >
       <View style={styles.header}>
@@ -76,7 +75,14 @@ export function Detail() {
       </View>
 
       <View style={styles.container}>
-        <Text style={styles.headerStats}>Base Stats</Text>
+        <Text
+          style={{
+            ...styles.headerStats,
+            color: boxType[currentType],
+          }}
+        >
+          Base Stats
+        </Text>
 
         {route.params?.data.stats.map((attribute) => (
           <View key={attribute.stat.name} style={styles.statusBox}>
@@ -94,7 +100,13 @@ export function Detail() {
         ))}
 
         <View>
-          <Text>Abilities</Text>
+          <Text style={{ ...styles.headerStats, color: boxType[currentType] }}>
+            Abilities
+          </Text>
+
+          {route.params?.data.abilities.map((abilityInfo) => (
+            <Text style={styles.text}>{abilityInfo.ability.name}</Text>
+          ))}
         </View>
       </View>
     </ScrollView>
@@ -152,7 +164,8 @@ const styles = StyleSheet.create({
   },
   headerStats: {
     fontSize: 22,
-    fontWeight: "500",
+    fontWeight: "bold",
+    lineHeight: 19,
     padding: 20,
   },
   statusBox: {
@@ -178,5 +191,11 @@ const styles = StyleSheet.create({
   },
   contentBar: {
     marginLeft: 20,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 19,
+    textTransform: "capitalize",
+    padding: 14,
   },
 });

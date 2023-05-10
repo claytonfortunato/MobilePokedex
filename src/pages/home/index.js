@@ -33,14 +33,14 @@ export const Home = () => {
         const { results } = response.data;
         const payloadPokemons = await Promise.all(
           results.map(async (pokemon) => {
-            const { id, types, stats } = await getMoreInfoAboutPokemonsByUrl(
-              pokemon.url
-            );
+            const { id, types, stats, abilities } =
+              await getMoreInfoAboutPokemonsByUrl(pokemon.url);
             return {
               name: pokemon.name,
               id,
               types,
               stats,
+              abilities,
             };
           })
         );

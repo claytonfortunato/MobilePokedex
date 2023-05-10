@@ -27,6 +27,6 @@ export const boxType = {
   normal: "#9DA0AA",
   bug: "#8CB330",
   flying: "#748FC9",
-  eletric: "#F2CB55",
+  electric: "#F2CB55",
   ground: "#F78551",
 };
