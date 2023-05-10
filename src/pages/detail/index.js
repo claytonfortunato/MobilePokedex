@@ -18,14 +18,20 @@ import { AntDesign } from "@expo/vector-icons";
 
 import Circle from "../../assets/img/Circle.png";
 
-import api from "../../services/api";
 import { TypeElement } from "../../components/typeElement";
+
+import * as Progress from "react-native-progress";
+import api from "../../services/api";
 
 export function Detail() {
   const route = useRoute();
   const navigation = useNavigation();
 
   const [loading, setLoading] = useState(false);
+
+  const currentType = route.params?.data.types[0].type.name;
+
+  const color = boxType[currentType];
 
   const handleBack = () => {
     navigation.navigate("Home");
@@ -73,9 +79,17 @@ export function Detail() {
         <Text style={styles.headerStats}>Base Stats</Text>
 
         {route.params?.data.stats.map((attribute) => (
-          <View key={attribute.stat.name}>
-            <Text>{attribute.stat.name}</Text>
-            <Text>{attribute.base_stat}</Text>
+          <View key={attribute.stat.name} style={styles.statusBox}>
+            <Text style={styles.attribute}>{attribute.stat.name}</Text>
+            <Text style={styles.attributeNumber}>{attribute.base_stat}</Text>
+            <View style={styles.contentBar}>
+              <Progress.Bar
+                progress={100}
+                borderWidth={0}
+                width={attribute.base_stat}
+                color={color}
+              />
+            </View>
           </View>
         ))}
 
@@ -126,8 +140,11 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: "#ffffff",
-    height: 2100,
-    borderRadius: 30,
+    flex: 1,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    marginTop: -40,
+    padding: 20,
   },
   elementType: {
     flexDirection: "row",
@@ -136,7 +153,30 @@ const styles = StyleSheet.create({
   headerStats: {
     fontSize: 22,
     fontWeight: "500",
+    padding: 20,
+  },
+  statusBox: {
+    width: "100%",
+    padding: 14,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  attribute: {
+    fontWeight: "500",
+    fontSize: 14,
+    lineHeight: 14,
+    width: 110,
+    textTransform: "capitalize",
+    color: "#222",
+  },
+  attributeNumber: {
+    fontSize: 18,
+    fontWeight: "normal",
+    lineHeight: 19,
+    color: "#aaa",
     marginLeft: 20,
-    marginTop: 20,
+  },
+  contentBar: {
+    marginLeft: 20,
   },
 });
