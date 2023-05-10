@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ScrollView,
   View,
@@ -7,7 +7,6 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 
@@ -21,13 +20,10 @@ import Circle from "../../assets/img/Circle.png";
 import { TypeElement } from "../../components/typeElement";
 
 import * as Progress from "react-native-progress";
-import api from "../../services/api";
 
 export function Detail() {
   const route = useRoute();
   const navigation = useNavigation();
-
-  const [loading, setLoading] = useState(false);
 
   const currentType = route.params?.data.types[0].type.name;
 
@@ -84,22 +80,24 @@ export function Detail() {
           Base Stats
         </Text>
 
-        {route.params?.data.stats.map((attribute) => (
-          <View key={attribute.stat.name} style={styles.statusBox}>
-            <Text style={styles.attribute}>{attribute.stat.name}</Text>
-            <Text style={styles.attributeNumber}>{attribute.base_stat}</Text>
-            <View style={styles.contentBar}>
-              <Progress.Bar
-                progress={100}
-                borderWidth={0}
-                width={attribute.base_stat}
-                color={color}
-              />
+        <View style={styles.contentStats}>
+          {route.params?.data.stats.map((attribute) => (
+            <View key={attribute.stat.name} style={styles.statusBox}>
+              <Text style={styles.attribute}>{attribute.stat.name}</Text>
+              <Text style={styles.attributeNumber}>{attribute.base_stat}</Text>
+              <View style={styles.contentBar}>
+                <Progress.Bar
+                  progress={100}
+                  borderWidth={1}
+                  width={attribute.base_stat}
+                  color={color}
+                />
+              </View>
             </View>
-          </View>
-        ))}
+          ))}
+        </View>
 
-        <View>
+        <View style={styles.contentAbilit}>
           <Text style={{ ...styles.headerStats, color: boxType[currentType] }}>
             Abilities
           </Text>
@@ -153,32 +151,36 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#ffffff",
     flex: 1,
+    height: 800,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     marginTop: -40,
     padding: 20,
+    alignItems: "center",
   },
   elementType: {
     flexDirection: "row",
     marginTop: 8,
   },
   headerStats: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: "bold",
     lineHeight: 19,
     padding: 20,
   },
   statusBox: {
     width: "100%",
+    margin: 10,
     padding: 14,
     flexDirection: "row",
     alignItems: "center",
   },
   attribute: {
-    fontWeight: "500",
-    fontSize: 14,
+    fontWeight: "bold",
+    fontSize: 16,
     lineHeight: 14,
-    width: 110,
+    width: 120,
+    height: 30,
     textTransform: "capitalize",
     color: "#222",
   },
@@ -193,9 +195,12 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   text: {
-    fontSize: 16,
+    fontSize: 22,
     lineHeight: 19,
     textTransform: "capitalize",
     padding: 14,
+  },
+  contentAbilit: {
+    marginTop: 20,
   },
 });
