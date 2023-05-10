@@ -8,14 +8,13 @@ import api from "../../services/api";
 export const Search = () => {
   const route = useRoute();
 
-  const pokemonId = route.params;
+  const pokemonId = route.params?.data;
   const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
     async function fetchPokemons() {
       const response = await api.get(`/pokemon?name_like=${pokemonId}`);
-
-      setPokemons(response);
+      setPokemons(response.data);
     }
     fetchPokemons();
   }, [pokemonId]);
@@ -23,7 +22,6 @@ export const Search = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        showsHorizontalScrollIndicator={false}
         data={pokemons}
         keyExtractor={(pokemon) => pokemon.id.toString()}
         renderItem={({ item }) => <Card data={item} />}
@@ -42,6 +40,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   text: {
-    fontSize: 18,
+    fontSize: 20,
   },
 });
